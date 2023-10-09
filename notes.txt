@@ -1,0 +1,65 @@
+in theme file
+
+import { createTheme } from '@mui/material/styles';
+
+const desktopTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#F3AA60',
+    },
+    secondary: {
+      main: '#1D5B79',
+    },
+  },
+});
+
+const mobileTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#7CA7F9',
+    },
+    secondary: {
+      main: '#F55A4C',
+    },
+  },
+});
+
+const darkTheme = createTheme({
+  palette: {
+    type: 'dark',
+    primary: {
+      main: '#3f51b5',
+    },
+    secondary: {
+      main: '#f50057',
+    },
+  },
+});
+
+
+in the file to chek the theme
+------------------------------
+export const Layout = ({ toggleTheme, currentTheme }) => {
+  const { isDesktop, isMobile } = useResponsive();
+
+  // Select the appropriate theme based on device and currentTheme
+  let selectedTheme;
+  if (isDesktop) {
+    selectedTheme = currentTheme === 'dark' ? { ...desktopTheme, ...darkTheme } : desktopTheme;
+  } else {
+    selectedTheme = currentTheme === 'dark' ? { ...mobileTheme, ...darkTheme } : mobileTheme;
+  }
+
+  return (
+    <ThemeProvider theme={selectedTheme}>
+      {/* Rest of the code */}
+    </ThemeProvider>
+  );
+};
+
+explanation for:
+if (isDesktop) {
+  selectedTheme = currentTheme === 'dark' ? { ...desktopTheme, ...darkTheme } : desktopTheme;
+} else {
+  selectedTheme = currentTheme === 'dark' ? { ...mobileTheme, ...darkTheme } : mobileTheme;
+}
